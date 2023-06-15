@@ -4,7 +4,7 @@
       v-if="editorStore.bgImg"
       ref="bgImg"
       :src="rocRequire(`@/assets/images/${editorStore.bgImg}`)"
-      alt="库区管理"
+      alt="背景"
       @click="editorStore.remoteActive()"
       @load="handleLoad"
     />
