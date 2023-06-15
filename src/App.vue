@@ -16,22 +16,26 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style lang="scss">
 @import '@/assets/css/base.css';
-/* 全局样式 开发时清空 */
-#app {
-  text-align: center;
-  color: #2c3e50;
+* {
+  box-sizing: border-box;
 }
-
-#nav {
-  padding: 30px;
+html,
+body {
+  overflow: hidden;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+img {
+  display: block;
 }
-
-#nav a.router-link-active {
-  color: #ff9999;
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+/* 样式滚动条的轨道部分 */
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+/* 样式滚动条的滑块部分 */
+::-webkit-scrollbar-thumb {
+  background-color: #000;
 }
 </style>

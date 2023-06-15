@@ -1,6 +1,6 @@
 <template>
   <div class="editor">
-    <TopBar :height="30" />
+    <TopBar :height="40" />
     <div class="main-box">
       <LeftSidebar />
       <ContentMain />
@@ -23,7 +23,7 @@ import TopBar from './components/TopBar/TopBar.vue'
   .right-side-bar,
   .content-main {
     width: 260px;
-    height: calc(100vh - 30px);
+    height: calc(100vh - 40px);
     background: #000;
   }
   .content-main {
