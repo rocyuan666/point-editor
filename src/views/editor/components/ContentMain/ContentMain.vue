@@ -43,7 +43,7 @@
 </template>
 
 <script setup name="ContentMain">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive } from 'vue'
 import { useEditorStore } from '@/stores/editor'
 import { rocRequire } from '@/utils/getStaticAssets'
 import { addPx, clearPx } from '@/utils/utils'
