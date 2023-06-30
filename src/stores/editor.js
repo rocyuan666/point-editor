@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { createUUID } from 'roc-utils'
+import componentsJson from '@/config/componentsData'
 
 export const useEditorStore = defineStore('editor', {
   state: () => ({
@@ -10,34 +11,20 @@ export const useEditorStore = defineStore('editor', {
     bgImg: localStorage.getItem('bgImg') || '',
     activeElementObj: {},
     allElementJson: JSON.parse(localStorage.getItem('allElementJson')) || [],
-    componentsJson: [
-      {
-        tag: 'p',
-        name: '文本',
-        value: '文本文本',
-        style: {
-          fontSize: '14px',
-          color: '#fff',
-          left: 0,
-          top: 0,
-        },
-      },
-      {
-        tag: 'img',
-        name: '图片',
-        src: 'kuang.jpg',
-        alt: '框',
-        style: {
-          width: '',
-          height: '',
-          left: 0,
-          top: 0,
-        },
-      },
-    ],
+    componentsJson,
   }),
   getters: {},
   actions: {
+    // 修改工作区中的元素
+    editElement() {
+      for (let i = 0; i < this.allElementJson.length; i++) {
+        if (this.allElementJson[i].id === this.activeElementObj.id) {
+          this.allElementJson.splice(i, 1, this.activeElementObj)
+          break
+        }
+      }
+      localStorage.setItem('allElementJson', JSON.stringify(this.allElementJson))
+    },
     // 工作区中添加元素
     addElement(elementObj) {
       elementObj['id'] = createUUID()
@@ -46,10 +33,11 @@ export const useEditorStore = defineStore('editor', {
     },
     // 工作区中删除元素
     removeElement() {
-      // this.activeElementObj
-      this.allElementJson.forEach((item, index) => {
-        console.log(item)
+      this.allElementJson = this.allElementJson.filter((item) => {
+        return item.id != this.activeElementObj.id
       })
+      localStorage.setItem('allElementJson', JSON.stringify(this.allElementJson))
+      this.remoteActive()
     },
     // 取消选中的元素
     remoteActive() {
