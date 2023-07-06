@@ -49,8 +49,8 @@ a,
 img {
 	-webkit-touch-callout: none;
 }
-html,
+/* html,
 body {
 	-webkit-user-select: none;
 	user-select: none;
-}
+} */

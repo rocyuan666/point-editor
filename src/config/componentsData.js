@@ -13,11 +13,11 @@ export default [
   {
     tag: 'img',
     name: '图片',
-    src: 'icon-cam.png',
+    src: 'icon-tank.png',
     alt: '图片',
     style: {
-      width: '',
-      height: '',
+      width: '325px',
+      height: '364px',
       left: 0,
       top: 0,
     },

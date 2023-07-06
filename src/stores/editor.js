@@ -26,7 +26,8 @@ export const useEditorStore = defineStore('editor', {
       localStorage.setItem('allElementJson', JSON.stringify(this.allElementJson))
     },
     // 工作区中添加元素
-    addElement(elementObj) {
+    addElement(elObj) {
+      const elementObj = JSON.parse(JSON.stringify(elObj))
       elementObj['id'] = createUUID()
       this.allElementJson.push(elementObj)
       localStorage.setItem('allElementJson', JSON.stringify(this.allElementJson))
