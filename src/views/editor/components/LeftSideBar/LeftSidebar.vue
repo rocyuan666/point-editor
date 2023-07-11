@@ -14,6 +14,7 @@
     </div>
     <div class="add-bgimg" v-else>
       <p>请先添加背景</p>
+      <p class="tips">添加的一切资源请放在以下目录：<br />@/assets/images/</p>
       <div>
         <input type="text" placeholder="图片名称加后缀(xxx.jpg)" v-model="bgImgName" />
       </div>
@@ -42,6 +43,10 @@ function addElement(item) {
     color: #ccc;
     padding-top: 50px;
     font-size: 18px;
+    .tips {
+      font-size: 14px;
+      color: #f00;
+    }
     input {
       padding: 5px 10px;
     }
