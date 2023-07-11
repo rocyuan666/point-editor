@@ -59,6 +59,7 @@ export const useEditorStore = defineStore('editor', {
     clearBgImg() {
       this.bgImg = ''
       localStorage.setItem('bgImg', this.bgImg)
+      this.clear()
     },
     // 添加背景图
     addBgImg(fileName) {
