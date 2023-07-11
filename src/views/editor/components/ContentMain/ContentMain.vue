@@ -117,6 +117,8 @@ $frame: 20px;
   position: relative;
   overflow: auto;
   padding: $frame;
+  -webkit-user-select: none;
+  user-select: none;
   .screen-box {
     position: absolute;
     width: 100%;
