@@ -8,6 +8,7 @@ export default [
       color: '#fff',
       left: 0,
       top: 0,
+      zIndex: 'auto',
     },
   },
   {
@@ -20,6 +21,7 @@ export default [
       height: '364px',
       left: 0,
       top: 0,
+      zIndex: 'auto',
     },
   },
 ]
