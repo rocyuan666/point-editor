@@ -38,6 +38,8 @@ function addElement(item) {
 <style lang="scss" scoped>
 .left-side-bar {
   padding: 20px 0;
+  -webkit-user-select: none;
+  user-select: none;
   .add-bgimg {
     text-align: center;
     color: #ccc;
