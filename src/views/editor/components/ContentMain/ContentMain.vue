@@ -112,6 +112,7 @@ function getScale() {
   const ww = refContentMain.value.clientWidth / state.screen.widthNum
   const hh = refContentMain.value.clientHeight / state.screen.heightNum
   const resScale = ww < hh ? ww : hh
+  // const resScale = ww
   refContentMain.value.style.setProperty('--scale', resScale)
   if (editorStore.scale) {
     scaleStyle.style = {
@@ -159,6 +160,7 @@ function handleLoad() {
     height: 100%;
     left: 0;
     top: 0;
+    overflow-y: auto;
     > * {
       position: absolute;
       cursor: pointer;

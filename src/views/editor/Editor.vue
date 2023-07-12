@@ -19,6 +19,7 @@ import TopBar from './components/TopBar/TopBar.vue'
 <style lang="scss" scoped>
 .main-box {
   display: flex;
+  background: #eee;
   .left-side-bar,
   .right-side-bar {
     width: 260px;
@@ -27,7 +28,6 @@ import TopBar from './components/TopBar/TopBar.vue'
   .content-main {
     width: calc(100% - 520px);
     height: calc(100vh - 40px);
-    background: #eee;
   }
 }
 </style>
