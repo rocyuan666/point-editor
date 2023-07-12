@@ -1,5 +1,5 @@
 <template>
-  <div class="content-main">
+  <div class="content-main" ref="refContentMain" :style="scaleStyle.style">
     <img
       v-if="editorStore.bgImg"
       ref="bgImg"
@@ -43,7 +43,7 @@
 </template>
 
 <script setup name="ContentMain">
-import { ref, reactive } from 'vue'
+import { ref, reactive, nextTick, watch } from 'vue'
 import { useEditorStore } from '@/stores/editor'
 import { rocRequire } from '@/utils/getStaticAssets'
 import { addPx, clearPx } from '@/utils/utils'
@@ -53,6 +53,8 @@ const state = reactive({
   screen: {
     width: '100%',
     height: '100%',
+    widthNum: 0,
+    heightNum: 0,
   },
   mouseElXY: {
     x: 0,
@@ -100,6 +102,36 @@ function getXY(e) {
   editorStore.handleMousemoveXY(e.offsetX, e.offsetY)
 }
 
+// 设置自适应窗口设置
+const scaleStyle = reactive({
+  style: {},
+})
+const refContentMain = ref(null)
+const scale = ref(1)
+function getScale() {
+  const ww = refContentMain.value.clientWidth / state.screen.widthNum
+  const hh = refContentMain.value.clientHeight / state.screen.heightNum
+  const resScale = ww < hh ? ww : hh
+  refContentMain.value.style.setProperty('--scale', resScale)
+  if (editorStore.scale) {
+    scaleStyle.style = {
+      transform: 'scale(var(--scale))',
+    }
+  } else {
+    scaleStyle.style = {
+      overflow: 'auto',
+    }
+  }
+  return resScale
+}
+
+watch(
+  () => editorStore.scale,
+  () => {
+    handleLoad()
+  }
+)
+
 const bgImg = ref(null)
 /**
  * 背景图加载完成
@@ -107,25 +139,26 @@ const bgImg = ref(null)
 function handleLoad() {
   state.screen.width = `${bgImg.value.width}px`
   state.screen.height = `${bgImg.value.height}px`
+  state.screen.widthNum = bgImg.value.width
+  state.screen.heightNum = bgImg.value.height
+  nextTick(() => {
+    scale.value = getScale()
+  })
 }
 </script>
 
 <style lang="scss" scoped>
-$frame: 20px;
-
 .content-main {
-  position: relative;
-  overflow: auto;
-  padding: $frame;
   -webkit-user-select: none;
   user-select: none;
+  position: relative;
+  transform-origin: left top;
   .screen-box {
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
-    margin: $frame;
     > * {
       position: absolute;
       cursor: pointer;

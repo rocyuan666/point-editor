@@ -4,7 +4,7 @@ export default [
     name: '文本',
     value: '文本文本',
     style: {
-      fontSize: '14px',
+      fontSize: '60px',
       color: '#fff',
       left: 0,
       top: 0,

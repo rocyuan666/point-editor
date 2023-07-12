@@ -12,9 +12,20 @@ export const useEditorStore = defineStore('editor', {
     activeElementObj: {},
     allElementJson: JSON.parse(localStorage.getItem('allElementJson')) || [],
     componentsJson,
+    scale:
+      localStorage.getItem('scale') == 'null'
+        ? true
+        : localStorage.getItem('scale') == 'false'
+        ? false
+        : true,
   }),
   getters: {},
   actions: {
+    // 启用关闭自适应
+    openCloseScale() {
+      this.scale = !this.scale
+      localStorage.setItem('scale', this.scale)
+    },
     // 修改工作区中的元素
     editElement() {
       for (let i = 0; i < this.allElementJson.length; i++) {

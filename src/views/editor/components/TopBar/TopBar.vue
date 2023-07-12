@@ -6,6 +6,9 @@
       <button @click="editorStore.remoteActive()">取消选中</button>
       <button @click="editorStore.clear()">清空元素</button>
       <button @click="editorStore.removeElement()">删除元素</button>
+      <button @click="editorStore.openCloseScale()">
+        {{ editorStore.scale ? '关闭' : '启用' }}自适应
+      </button>
     </div>
     <div class="right">
       <p>鼠标位置: x:{{ editorStore.mouse.x }} y:{{ editorStore.mouse.y }}</p>

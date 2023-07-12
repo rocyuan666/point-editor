@@ -20,16 +20,14 @@ import TopBar from './components/TopBar/TopBar.vue'
 .main-box {
   display: flex;
   .left-side-bar,
-  .right-side-bar,
-  .content-main {
+  .right-side-bar {
     width: 260px;
-    height: calc(100vh - 40px);
     background: #000;
   }
   .content-main {
-    flex: 1;
+    width: calc(100% - 520px);
+    height: calc(100vh - 40px);
     background: #eee;
-    overflow-x: auto;
   }
 }
 </style>
