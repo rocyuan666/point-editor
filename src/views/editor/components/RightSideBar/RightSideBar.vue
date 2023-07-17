@@ -14,7 +14,7 @@
       <!-- <pre class="code">{{ editorStore.activeElementObj }}</pre> -->
     </div>
     <div class="edit-item">
-      <p class="title">工作区数据：</p>
+      <p class="title">工作区数据（{{ editorStore.allElementJson.length }}个）：</p>
       <pre class="code">{{ editorStore.allElementJson }}</pre>
     </div>
   </div>
