@@ -114,15 +114,6 @@ function getScale() {
   const resScale = ww < hh ? ww : hh
   // const resScale = ww
   refContentMain.value.style.setProperty('--scale', resScale)
-  if (editorStore.scale) {
-    scaleStyle.style = {
-      transform: 'scale(var(--scale))',
-    }
-  } else {
-    scaleStyle.style = {
-      overflow: 'auto',
-    }
-  }
   return resScale
 }
 
@@ -138,6 +129,15 @@ const bgImg = ref(null)
  * 背景图加载完成
  */
 function handleLoad() {
+  if (editorStore.scale) {
+    scaleStyle.style = {
+      transform: 'scale(var(--scale))',
+    }
+  } else {
+    scaleStyle.style = {
+      overflow: 'auto',
+    }
+  }
   state.screen.width = `${bgImg.value.width}px`
   state.screen.height = `${bgImg.value.height}px`
   state.screen.widthNum = bgImg.value.width
