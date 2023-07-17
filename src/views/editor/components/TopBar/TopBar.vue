@@ -2,10 +2,10 @@
   <div class="top-bar" :style="{ height: `${props.height}px` }">
     <div class="left">
       <p class="logo">编辑器</p>
-      <button @click="editorStore.clearBgImg()">清空背景图</button>
-      <button @click="editorStore.remoteActive()">取消选中</button>
-      <button @click="editorStore.clear()">清空元素</button>
-      <button @click="editorStore.removeElement()">删除元素</button>
+      <button @click="editorStore.clearBgImg()">清空背景</button>
+      <button @click="editorStore.clear()" title="ctrl+alt+c">清空元素</button>
+      <button @click="editorStore.removeElement()" title="ctrl+d">删除元素</button>
+      <button @click="editorStore.copyElement()" title="ctrl+c">复制元素</button>
       <button @click="editorStore.openCloseScale()">
         {{ editorStore.scale ? '关闭' : '启用' }}自适应
       </button>

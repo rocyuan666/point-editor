@@ -20,7 +20,7 @@
           v-if="item.tag == 'p'"
           :class="{ active: editorStore.activeElementObj.id == item.id }"
           :style="item.style"
-          @click.stop="handleActive(item)"
+          @click.stop="editorStore.handleActive(item)"
           @dragend="handleDragend"
           @mousedown="handleMousedown"
         >
@@ -33,7 +33,7 @@
           :class="{ active: editorStore.activeElementObj.id == item.id }"
           :src="rocRequire(`@/assets/images/${item.src}`)"
           :alt="item.alt"
-          @click.stop="handleActive(item)"
+          @click.stop="editorStore.handleActive(item)"
           @dragend="handleDragend"
           @mousedown="handleMousedown"
         />
@@ -43,10 +43,14 @@
 </template>
 
 <script setup name="ContentMain">
-import { ref, reactive, nextTick, watch } from 'vue'
+import { ref, reactive, nextTick, watch, onMounted } from 'vue'
 import { useEditorStore } from '@/stores/editor'
 import { rocRequire } from '@/utils/getStaticAssets'
 import { addPx, clearPx } from '@/utils/utils'
+import { handleKeys } from '@/utils/handleKeys'
+
+// 快捷键
+handleKeys()
 
 const editorStore = useEditorStore()
 const state = reactive({
@@ -61,14 +65,6 @@ const state = reactive({
     y: 0,
   },
 })
-
-/**
- * 点击选中元素
- * @param {Object} item 选中元素的对象
- */
-function handleActive(item) {
-  editorStore.activeElementObj = item
-}
 
 /**
  * 拖拽结束 更新 xy 值

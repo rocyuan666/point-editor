@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { createUUID } from 'roc-utils'
+import _ from 'lodash'
 import componentsJson from '@/config/componentsData'
+import { nextTick } from 'vue'
 
 export const useEditorStore = defineStore('editor', {
   state: () => ({
@@ -21,6 +23,12 @@ export const useEditorStore = defineStore('editor', {
   }),
   getters: {},
   actions: {
+    // 复制元素
+    copyElement() {
+      const copyElementObj = _.cloneDeep(this.activeElementObj)
+      const addElementObj = this.addElement(copyElementObj)
+      this.handleActive(addElementObj)
+    },
     // 启用关闭自适应
     openCloseScale() {
       this.scale = !this.scale
@@ -42,6 +50,7 @@ export const useEditorStore = defineStore('editor', {
       elementObj['id'] = createUUID().substring(createUUID().length - 10)
       this.allElementJson.push(elementObj)
       localStorage.setItem('allElementJson', JSON.stringify(this.allElementJson))
+      return elementObj
     },
     // 工作区中删除元素
     removeElement() {
@@ -50,6 +59,10 @@ export const useEditorStore = defineStore('editor', {
       })
       localStorage.setItem('allElementJson', JSON.stringify(this.allElementJson))
       this.remoteActive()
+    },
+    // 处理选中的元素
+    handleActive(item) {
+      this.activeElementObj = item
     },
     // 取消选中的元素
     remoteActive() {
