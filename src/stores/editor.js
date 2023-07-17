@@ -12,7 +12,9 @@ export const useEditorStore = defineStore('editor', {
     },
     bgImg: localStorage.getItem('bgImg') || '',
     activeElementObj: {},
-    allElementJson: JSON.parse(localStorage.getItem('allElementJson')) || [],
+    allElementJson: localStorage.getItem('allElementJson')
+      ? JSON.parse(localStorage.getItem('allElementJson'))
+      : [],
     componentsJson,
     scale:
       localStorage.getItem('scale') == 'null'
