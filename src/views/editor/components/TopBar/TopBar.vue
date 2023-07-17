@@ -6,6 +6,7 @@
       <button @click="editorStore.clear()" title="ctrl+alt+c">清空元素</button>
       <button @click="editorStore.removeElement()" title="ctrl+d">删除元素</button>
       <button @click="editorStore.copyElement()" title="ctrl+c">复制元素</button>
+      <button @click="editorStore.exportJson()" title="ctrl+s">保存json</button>
       <button @click="editorStore.openCloseScale()">
         {{ editorStore.scale ? '关闭' : '启用' }}自适应
       </button>

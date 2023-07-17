@@ -14,6 +14,10 @@ export function handleKeys() {
       // 删除
       e.preventDefault()
       editorStore.removeElement()
+    } else if (e.ctrlKey && e.key === 's') {
+      // 保存json
+      e.preventDefault()
+      editorStore.exportJson()
     } else if (e.ctrlKey && e.key === 'c') {
       // 复制
       e.preventDefault()

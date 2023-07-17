@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { createUUID } from 'roc-utils'
 import _ from 'lodash'
 import componentsJson from '@/config/componentsData'
-import { nextTick } from 'vue'
+import FileSaver from 'file-saver'
 
 export const useEditorStore = defineStore('editor', {
   state: () => ({
@@ -23,6 +23,13 @@ export const useEditorStore = defineStore('editor', {
   }),
   getters: {},
   actions: {
+    // 导出数据
+    exportJson() {
+      const blob = new Blob([JSON.stringify(this.allElementJson)], {
+        type: 'text/json;charset=utf-8',
+      })
+      FileSaver.saveAs(blob, 'editor.json')
+    },
     // 复制元素
     copyElement() {
       const copyElementObj = _.cloneDeep(this.activeElementObj)
