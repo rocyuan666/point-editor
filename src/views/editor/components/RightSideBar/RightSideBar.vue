@@ -7,7 +7,7 @@
         :options="cmOptions"
         border
         ref="cmRef"
-        height="300"
+        height="400"
         @input="onInput"
       >
       </Codemirror>
@@ -56,7 +56,7 @@ const onInput = (val) => {
     }
     .code {
       padding: 2px;
-      height: calc(100vh - 480px);
+      height: calc(100vh - 580px);
       overflow-x: auto;
       background-color: #2b2b2b;
       border-radius: 2px;
