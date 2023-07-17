@@ -4,10 +4,11 @@ export default [
     name: '文本',
     value: '文本文本',
     style: {
-      fontSize: '60px',
-      color: '#fff',
+      position: 'absolute',
       left: 0,
       top: 0,
+      fontSize: '60px',
+      color: '#fff',
       zIndex: 'auto',
     },
     data: {
@@ -20,10 +21,11 @@ export default [
     src: 'icon-cam.png',
     alt: '图片',
     style: {
-      width: '254px',
-      height: '254px',
+      position: 'absolute',
       left: 0,
       top: 0,
+      width: '254px',
+      height: '254px',
       zIndex: 'auto',
     },
     data: {

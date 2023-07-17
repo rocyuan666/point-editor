@@ -158,7 +158,6 @@ function handleLoad() {
     top: 0;
     overflow-y: auto;
     > * {
-      position: absolute;
       cursor: pointer;
       &.active {
         box-shadow: 0 0 20px #f00;
