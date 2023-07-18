@@ -56,7 +56,7 @@ const onInput = (val) => {
     }
     .code {
       padding: 2px;
-      height: calc(100vh - 580px);
+      height: calc(100vh - 550px);
       overflow-x: auto;
       background-color: #2b2b2b;
       border-radius: 2px;

@@ -14,11 +14,17 @@
     </div>
     <div class="add-bgimg" v-else>
       <p>请先添加背景</p>
-      <p class="tips">添加的一切资源请放在以下目录：<br />@/assets/images/</p>
+      <p class="tips" v-if="isDev">添加的一切资源请放在以下目录：<br />@/assets/images/</p>
+      <p class="tips" v-else>添加的一切资源请放在以下目录：<br />/static/</p>
       <div>
-        <input type="text" placeholder="图片名称加后缀(xxx.jpg)" v-model="bgImgName" />
+        <input
+          type="text"
+          placeholder="图片名称加后缀(xxx.jpg)"
+          v-model="bgImgName"
+          @keydown.enter="handleBg"
+        />
       </div>
-      <button @click="editorStore.addBgImg(bgImgName)">添加背景</button>
+      <button @click="handleBg">添加背景</button>
     </div>
   </div>
 </template>
@@ -27,11 +33,25 @@
 import { ref } from 'vue'
 import { useEditorStore } from '@/stores/editor'
 
+const isDev = import.meta.env.DEV
+
 const bgImgName = ref('')
 
 const editorStore = useEditorStore()
 function addElement(item) {
   editorStore.addElement(item)
+}
+
+function handleBg() {
+  const imgList = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
+  const currentSuffix = `.${bgImgName.value.split('.')[bgImgName.value.split('.').length - 1]}`
+  if (!bgImgName.value.trim()) {
+    alert('背景不能为空')
+  } else if (!imgList.includes(currentSuffix)) {
+    alert('图片格式不正确')
+  } else {
+    editorStore.addBgImg(bgImgName)
+  }
 }
 </script>
 
