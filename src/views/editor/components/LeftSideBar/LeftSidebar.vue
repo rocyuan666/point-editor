@@ -55,6 +55,7 @@ function addElement(item) {
   }
   .cont-box {
     .title-p {
+      padding: 0 6px;
       color: #fff;
       font-size: 16px;
     }
