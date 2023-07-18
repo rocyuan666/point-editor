@@ -43,6 +43,11 @@ export const useEditorStore = defineStore('editor', {
       this.scale = !this.scale
       localStorage.setItem('scale', this.scale)
     },
+    // 修改工作区中所有数据
+    modifyAllElement(allData) {
+      this.allElementJson = allData
+      localStorage.setItem('allElementJson', JSON.stringify(this.allElementJson))
+    },
     // 修改工作区中的元素
     editElement() {
       for (let i = 0; i < this.allElementJson.length; i++) {

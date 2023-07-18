@@ -15,8 +15,10 @@
         <input type="text" id="api" v-model="apiValue" placeholder="请输入上传的api地址" />
         <button @click="handleUpdateApi">上传json</button>
       </div> -->
-      <button class="caozuo" @click="handleUpdate(0)">库区数据上传</button>
-      <button @click="handleUpdate(1)">生产数据上传</button>
+      <button class="caozuo" @click="handleUpdate(0)">上传库区数据</button>
+      <button @click="handleGetData(0)">获取库区数据</button>
+      <button @click="handleUpdate(1)">上传生产数据</button>
+      <button @click="handleGetData(1)">获取生产数据</button>
     </div>
     <div class="right">
       <p>鼠标位置: x:{{ editorStore.mouse.x }} y:{{ editorStore.mouse.y }}</p>
@@ -40,11 +42,24 @@ const props = defineProps({
 })
 
 /**
+ * 获取服务器数据
+ * @param {Number} type 类型 0库区 1生产
+ */
+async function handleGetData(type) {
+  const r = confirm(`确认获取${type == 0 ? ' 库区数据' : ' 生产数据'}`)
+  if (!r) return
+  const apiUrl = `http://sxjk2.lishengnet.com/api.php?_=ScreenApi::get_camera_json&type=${type}`
+  const [err, res] = await asyncTasks(axios.get(apiUrl))
+  if (err) return
+  if (res.data.data == null) return
+  editorStore.modifyAllElement(JSON.parse(res.data.data))
+}
+/**
  * 上传json数据
  * @param {Number} type 类型 0库区 1生产
  */
 async function handleUpdate(type) {
-  const r = confirm(`确认提交${type == 0 ? ' 库区数据' : ' 生产数据'}`)
+  const r = confirm(`确认上传${type == 0 ? ' 库区数据' : ' 生产数据'}`)
   if (!r) return
   const apiUrl = 'http://sxjk2.lishengnet.com/api.php?_=ScreenApi::save_camera_json'
   const sendObj = {
