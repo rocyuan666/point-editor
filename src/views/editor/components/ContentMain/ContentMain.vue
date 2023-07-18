@@ -3,7 +3,7 @@
     <img
       v-if="editorStore.bgImg"
       ref="bgImg"
-      :src="rocRequire(`@/assets/images/${editorStore.bgImg}`)"
+      :src="handlePath(editorStore.bgImg)"
       alt="背景"
       @load="handleLoad"
     />
@@ -31,7 +31,7 @@
           v-else-if="item.tag == 'img'"
           :style="item.style"
           :class="{ active: editorStore.activeElementObj.id == item.id }"
-          :src="rocRequire(`@/assets/images/${item.src}`)"
+          :src="handlePath(item.src)"
           :alt="item.alt"
           @click.stop="editorStore.handleActive(item)"
           @dragend="handleDragend"
@@ -45,7 +45,7 @@
 <script setup name="ContentMain">
 import { ref, reactive, nextTick, watch } from 'vue'
 import { useEditorStore } from '@/stores/editor'
-import { rocRequire } from '@/utils/getStaticAssets'
+import { handlePath } from '@/utils/getStaticAssets'
 import { addPx, clearPx } from '@/utils/utils'
 import { handleKeys } from '@/utils/handleKeys'
 

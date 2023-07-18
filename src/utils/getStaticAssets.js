@@ -13,3 +13,18 @@ export function rocRequire(filePath) {
   }
   return url.href
 }
+
+/**
+ * 文件路径转换
+ * @param {String} path 文件名
+ * @returns 正确文件全路径
+ */
+export function handlePath(path) {
+  if (import.meta.env.DEV) {
+    // 开发模式
+    return rocRequire(`@/assets/images/${path}`)
+  } else {
+    // 生产模式
+    return `/static/${path}`
+  }
+}
