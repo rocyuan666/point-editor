@@ -50,7 +50,7 @@ function handleBg() {
   } else if (!imgList.includes(currentSuffix)) {
     alert('图片格式不正确')
   } else {
-    editorStore.addBgImg(bgImgName)
+    editorStore.addBgImg(bgImgName.value)
   }
 }
 </script>
