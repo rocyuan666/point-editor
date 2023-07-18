@@ -2,23 +2,25 @@
   <div class="top-bar" :style="{ height: `${props.height}px` }">
     <div class="left">
       <p class="logo">编辑器</p>
-      <button @click="editorStore.clearBgImg()">清空背景</button>
-      <button @click="editorStore.clear()" title="ctrl+alt+c">清空元素</button>
-      <button @click="editorStore.removeElement()" title="ctrl+r">删除元素</button>
-      <button @click="editorStore.copyElement()" title="ctrl+d">复制元素</button>
-      <button @click="editorStore.exportJson()" title="ctrl+s">保存json</button>
-      <button @click="editorStore.openCloseScale()">
-        {{ editorStore.scale ? '关闭' : '启用' }}自适应
-      </button>
-      <!-- <div class="api-box">
+      <template v-if="editorStore.bgImg">
+        <button @click="editorStore.clearBgImg()">清空背景</button>
+        <button @click="editorStore.clear()" title="ctrl+alt+c">清空元素</button>
+        <button @click="editorStore.removeElement()" title="ctrl+r">删除元素</button>
+        <button @click="editorStore.copyElement()" title="ctrl+d">复制元素</button>
+        <button @click="editorStore.exportJson()" title="ctrl+s">保存json</button>
+        <button @click="editorStore.openCloseScale()">
+          {{ editorStore.scale ? '关闭' : '启用' }}自适应
+        </button>
+        <!-- <div class="api-box">
         <label for="api">api地址：</label>
         <input type="text" id="api" v-model="apiValue" placeholder="请输入上传的api地址" />
         <button @click="handleUpdateApi">上传json</button>
       </div> -->
-      <button class="caozuo" @click="handleUpdate(0)">上传库区数据</button>
-      <button @click="handleGetData(0)">获取库区数据</button>
-      <button @click="handleUpdate(1)">上传生产数据</button>
-      <button @click="handleGetData(1)">获取生产数据</button>
+        <button class="caozuo" @click="handleUpdate(0)">上传库区数据</button>
+        <button @click="handleGetData(0)">获取库区数据</button>
+        <button @click="handleUpdate(1)">上传生产数据</button>
+        <button @click="handleGetData(1)">获取生产数据</button>
+      </template>
     </div>
     <div class="right">
       <p>鼠标位置: x:{{ editorStore.mouse.x }} y:{{ editorStore.mouse.y }}</p>
