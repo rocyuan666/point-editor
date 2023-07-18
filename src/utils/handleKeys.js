@@ -11,6 +11,10 @@ export function handleKeys() {
       e.preventDefault()
       editorStore.clear()
     } else if (e.ctrlKey && e.key === 'd') {
+      // 复制
+      e.preventDefault()
+      editorStore.copyElement()
+    } else if (e.ctrlKey && e.key === 'r') {
       // 删除
       e.preventDefault()
       editorStore.removeElement()
@@ -18,10 +22,6 @@ export function handleKeys() {
       // 保存json
       e.preventDefault()
       editorStore.exportJson()
-    } else if (e.ctrlKey && e.key === 'c') {
-      // 复制
-      e.preventDefault()
-      editorStore.copyElement()
     }
   })
 }
