@@ -12,10 +12,10 @@
           {{ editorStore.scale ? '关闭' : '启用' }}自适应
         </button>
         <!-- <div class="api-box">
-        <label for="api">api地址：</label>
-        <input type="text" id="api" v-model="apiValue" placeholder="请输入上传的api地址" />
-        <button @click="handleUpdateApi">上传json</button>
-      </div> -->
+          <label for="api">api地址：</label>
+          <input type="text" id="api" v-model="apiValue" placeholder="请输入上传的api地址" />
+          <button @click="handleUpdateApi">上传json</button>
+        </div> -->
         <button class="caozuo" @click="handleUpdate(0)">上传库区数据</button>
         <button @click="handleGetData(0)">获取库区数据</button>
         <button @click="handleUpdate(1)">上传生产数据</button>
