@@ -44,6 +44,7 @@
 
 <script setup name="ContentMain">
 import { ref, reactive, nextTick, watch } from 'vue'
+import { debounce } from 'roc-utils'
 import { useEditorStore } from '@/stores/editor'
 import { handlePath } from '@/utils/getStaticAssets'
 import { addPx, clearPx } from '@/utils/utils'
@@ -142,6 +143,11 @@ function handleLoad() {
     scale.value = getScale()
   })
 }
+
+// 窗口改变重新计算
+window.addEventListener('resize', () => {
+  handleLoad()
+})
 </script>
 
 <style lang="scss" scoped>
