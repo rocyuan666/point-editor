@@ -44,7 +44,6 @@
 
 <script setup name="ContentMain">
 import { ref, reactive, nextTick, watch } from 'vue'
-import { debounce } from 'roc-utils'
 import { useEditorStore } from '@/stores/editor'
 import { handlePath } from '@/utils/getStaticAssets'
 import { addPx, clearPx } from '@/utils/utils'
@@ -110,7 +109,8 @@ function getScale() {
   const hh = refContentMain.value.clientHeight / state.screen.heightNum
   const resScale = ww < hh ? ww : hh
   // const resScale = ww
-  refContentMain.value.style.setProperty('--scale', resScale)
+  refContentMain.value.style.setProperty('--scaleX', ww)
+  refContentMain.value.style.setProperty('--scaleY', hh)
   return resScale
 }
 
@@ -128,7 +128,7 @@ const bgImg = ref(null)
 function handleLoad() {
   if (editorStore.scale) {
     scaleStyle.style = {
-      transform: 'scale(var(--scale))',
+      transform: 'scaleX(var(--scaleX)) scaleY(var(--scaleY))',
     }
   } else {
     scaleStyle.style = {

@@ -23,6 +23,7 @@
       </template>
     </div>
     <div class="right">
+      <button @click="handlePreview">预览</button>
       <p>鼠标位置: x:{{ editorStore.mouse.x }} y:{{ editorStore.mouse.y }}</p>
     </div>
   </div>
@@ -32,6 +33,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { asyncTasks } from 'roc-utils'
+import { useRouter } from 'vue-router'
 import { isApi } from '@/utils/validate'
 import { useEditorStore } from '@/stores/editor'
 
@@ -42,6 +44,14 @@ const props = defineProps({
     required: true,
   },
 })
+
+const router = useRouter()
+/**
+ * 预览
+ */
+function handlePreview() {
+  router.push({ path: '/play' })
+}
 
 /**
  * 获取服务器数据
@@ -137,6 +147,12 @@ async function handleUpdateApi() {
     }
     button {
       margin: 0 5px;
+    }
+  }
+  .right {
+    display: flex;
+    button {
+      margin: 0 10px;
     }
   }
 }
