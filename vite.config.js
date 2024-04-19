@@ -11,7 +11,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vitePluginVueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 export default defineConfig(({ command, mode }) => ({
-  base: mode === 'production' ? '/' : '/',
+  base: mode === 'production' ? './' : './',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
