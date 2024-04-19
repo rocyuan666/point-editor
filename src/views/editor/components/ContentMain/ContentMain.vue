@@ -1,5 +1,5 @@
 <template>
-  <div class="content-main" ref="refContentMain" :style="scaleStyle.style">
+  <div class="content-main" ref="contentMainRef" :style="contentMainStyle">
     <img
       v-if="editorStore.bgImg"
       ref="bgImg"
@@ -9,9 +9,9 @@
     />
     <div
       v-if="editorStore.bgImg"
-      class="screen-box"
-      :style="{ width: state.screen.width, height: state.screen.height }"
-      @mousemove="getXY"
+      class="scene-box"
+      :style="{ width: scene.width, height: scene.height }"
+      @mousemove="(e) => editorStore.handleMousemoveXY(e.offsetX, e.offsetY)"
       @click="editorStore.remoteActive"
     >
       <template v-for="item in editorStore.allElementJson" :key="item.id">
@@ -46,108 +46,49 @@
 import { ref, reactive, nextTick, watch } from 'vue'
 import { useEditorStore } from '@/stores/editor'
 import { handlePath } from '@/utils/getStaticAssets'
-import { addPx, clearPx } from '@/utils/utils'
-import { handleKeys } from '@/utils/handleKeys'
+import { useDrag } from './js/useDrag'
 
-// 快捷键
-handleKeys()
-
+const { handleDragend, handleMousedown } = useDrag()
 const editorStore = useEditorStore()
-const state = reactive({
-  screen: {
-    width: '100%',
-    height: '100%',
-    widthNum: 0,
-    heightNum: 0,
-  },
-  mouseElXY: {
-    x: 0,
-    y: 0,
-  },
+const scene = reactive({
+  width: '100%',
+  height: '100%',
+  widthNum: 0,
+  heightNum: 0,
 })
-
-/**
- * 拖拽结束 更新 xy 值
- */
-function handleDragend(e) {
-  const oldX = editorStore.activeElementObj.style.left
-  const oldY = editorStore.activeElementObj.style.top
-  if (Object.keys(editorStore.activeElementObj).length) {
-    // 拖动后的元素xy = 旧位置 + 偏移位置 - 鼠标在元素上的偏移位置
-    editorStore.activeElementObj.style.left = addPx(clearPx(oldX) + e.offsetX - state.mouseElXY.x)
-    editorStore.activeElementObj.style.top = addPx(clearPx(oldY) + e.offsetY - state.mouseElXY.y)
-    // 修改工作区数据
-    editorStore.editElement()
-  }
-}
-
-/**
- * 鼠标在当前选中的元素上的偏移位置
- * @param {Event} e event对象
- */
-function handleMousedown(e) {
-  state.mouseElXY.x = e.offsetX
-  state.mouseElXY.y = e.offsetY
-}
-
-/**
- * 获取鼠标位置
- * @param {Object} e event对象
- */
-function getXY(e) {
-  editorStore.handleMousemoveXY(e.offsetX, e.offsetY)
-}
-
-// 设置自适应窗口设置
-const scaleStyle = reactive({
-  style: {},
-})
-const refContentMain = ref(null)
-const scale = ref(1)
-function getScale() {
-  const ww = refContentMain.value.clientWidth / state.screen.widthNum
-  const hh = refContentMain.value.clientHeight / state.screen.heightNum
-  const resScale = ww < hh ? ww : hh
-  // const resScale = ww
-  refContentMain.value.style.setProperty('--scaleX', ww)
-  refContentMain.value.style.setProperty('--scaleY', hh)
-  return resScale
-}
-
-watch(
-  () => editorStore.scale,
-  () => {
-    handleLoad()
-  }
-)
 
 const bgImg = ref(null)
+const contentMainStyle = ref({})
 /**
  * 背景图加载完成
  */
 function handleLoad() {
   if (editorStore.scale) {
-    scaleStyle.style = {
-      transform: 'scaleX(var(--scaleX)) scaleY(var(--scaleY))',
-    }
+    contentMainStyle.value = { transform: 'scaleX(var(--scaleX)) scaleY(var(--scaleY))' }
   } else {
-    scaleStyle.style = {
-      overflow: 'auto',
-    }
+    contentMainStyle.value = { overflow: 'auto' }
   }
-  state.screen.width = `${bgImg.value.width}px`
-  state.screen.height = `${bgImg.value.height}px`
-  state.screen.widthNum = bgImg.value.width
-  state.screen.heightNum = bgImg.value.height
-  nextTick(() => {
-    scale.value = getScale()
-  })
+  scene.width = `${bgImg.value.width}px`
+  scene.height = `${bgImg.value.height}px`
+  scene.widthNum = bgImg.value.width
+  scene.heightNum = bgImg.value.height
+  nextTick(() => (scale.value = getScale()))
 }
 
-// 窗口改变重新计算
-window.addEventListener('resize', () => {
-  handleLoad()
-})
+const contentMainRef = ref(null)
+const scale = ref(1)
+/**
+ * 内容区自适应设置
+ */
+function getScale() {
+  const ww = contentMainRef.value.clientWidth / scene.widthNum
+  const hh = contentMainRef.value.clientHeight / scene.heightNum
+  contentMainRef.value.style.setProperty('--scaleX', ww)
+  contentMainRef.value.style.setProperty('--scaleY', hh)
+}
+
+watch(() => editorStore.scale, handleLoad)
+window.addEventListener('resize', () => handleLoad())
 </script>
 
 <style lang="scss" scoped>
@@ -156,7 +97,7 @@ window.addEventListener('resize', () => {
   user-select: none;
   position: relative;
   transform-origin: left top;
-  .screen-box {
+  .scene-box {
     position: absolute;
     width: 100%;
     height: 100%;

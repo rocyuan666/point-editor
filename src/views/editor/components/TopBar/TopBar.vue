@@ -5,7 +5,7 @@
       <template v-if="editorStore.bgImg">
         <button @click="editorStore.clearBgImg()">清空背景</button>
         <button @click="editorStore.clear()" title="ctrl+alt+c">清空元素</button>
-        <button @click="editorStore.removeElement()" title="ctrl+r">删除元素</button>
+        <button @click="editorStore.removeElement()" title="delete">删除元素</button>
         <button @click="editorStore.copyElement()" title="ctrl+d">复制元素</button>
         <button @click="editorStore.exportJson()" title="ctrl+s">保存json</button>
         <button @click="editorStore.openCloseScale()">
@@ -16,10 +16,10 @@
           <input type="text" id="api" v-model="apiValue" placeholder="请输入上传的api地址" />
           <button @click="handleUpdateApi">上传json</button>
         </div> -->
-        <button class="caozuo" @click="handleUpdate(0)">上传库区数据</button>
+        <!-- <button class="caozuo" @click="handleUpdate(0)">上传库区数据</button>
         <button @click="handleGetData(0)">获取库区数据</button>
         <button @click="handleUpdate(1)">上传生产数据</button>
-        <button @click="handleGetData(1)">获取生产数据</button>
+        <button @click="handleGetData(1)">获取生产数据</button> -->
       </template>
     </div>
     <div class="right">
@@ -30,12 +30,13 @@
 </template>
 
 <script setup name="TopBar">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import axios from 'axios'
 import { asyncTasks } from 'roc-utils'
 import { useRouter } from 'vue-router'
 import { isApi } from '@/utils/validate'
 import { useEditorStore } from '@/stores/editor'
+import { useKeys } from '@/hooks/useKeys'
 
 const editorStore = useEditorStore()
 const props = defineProps({
@@ -44,7 +45,15 @@ const props = defineProps({
     required: true,
   },
 })
-
+watch(
+  () => editorStore.bgImg,
+  (val) => {
+    if (val !== '') useKeys()
+  },
+  {
+    immediate: true,
+  }
+)
 const router = useRouter()
 /**
  * 预览
