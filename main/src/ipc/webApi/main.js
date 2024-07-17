@@ -46,13 +46,13 @@ function getImagePath(event, title = '请选择文件') {
         if (result.canceled) {
           reject('取消选择')
         } else {
-          const imageBase64List = []
-          for (const filePath of result.filePaths) {
-            const imageBuffer = fs.readFileSync(filePath)
-            const imageData = `data:image/jpeg;base64,${imageBuffer.toString('base64')}`
-            imageBase64List.push(imageData)
-          }
-          resolve(imageBase64List)
+          // const imageBase64List = []
+          // for (const filePath of result.filePaths) {
+          //   const imageBuffer = fs.readFileSync(filePath)
+          //   const imageData = `data:image/jpeg;base64,${imageBuffer.toString('base64')}`
+          //   imageBase64List.push(imageData)
+          // }
+          resolve(result.filePaths)
         }
       })
       .catch((err) => {

@@ -26,6 +26,7 @@ function createWindow() {
       nodeIntegration: false, // 是否启用集成Node. 默认值为 false
       contextIsolation: true, // 上下文隔离关闭  默认为 true
       preload: path.join(__dirname, 'preload.js'),
+      webSecurity: false,
     },
   })
 
@@ -44,7 +45,7 @@ function createWindow() {
   createTray(win)
   // 定义ipcMain
   defineIpcMain()
-  
+
   mainWindowState.manage(win)
 }
 
