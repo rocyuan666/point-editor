@@ -23,25 +23,25 @@ let makers = [
 ]
 if (osType == 'Windows_NT') {
   makers.push(
-    {
-      name: '@electron-forge/maker-squirrel',
-      config: {
-        iconUrl: buildIcon.squirrel,
-        loadingGif,
-        setupIcon: buildIcon.win,
-      },
-    },
-    {
-      /**
-       * 构建msi安装包，电脑需要安装 wixtool 并配置环境变量
-       * 如：C:\Program Files (x86)\WiX Toolset v3.11\bin
-       * /wixtool/wix311.exe
-       */
-      name: '@electron-forge/maker-wix',
-      config: {
-        icon: buildIcon.win,
-      },
-    }
+    // {
+    //   name: '@electron-forge/maker-squirrel',
+    //   config: {
+    //     iconUrl: buildIcon.squirrel,
+    //     loadingGif,
+    //     setupIcon: buildIcon.win,
+    //   },
+    // },
+    // {
+    //   /**
+    //    * 构建msi安装包，电脑需要安装 wixtool 并配置环境变量
+    //    * 如：C:\Program Files (x86)\WiX Toolset v3.11\bin
+    //    * /wixtool/wix311.exe
+    //    */
+    //   name: '@electron-forge/maker-wix',
+    //   config: {
+    //     icon: buildIcon.win,
+    //   },
+    // }
   )
 } else if (osType == 'Darwin') {
   makers.push({

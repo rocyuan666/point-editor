@@ -1,0 +1,1 @@
+import{C as e}from"./ContentMain-0db761cc.js";import{o as t,c as a,x as n,d as o}from"./index-670daf14.js";const s={class:"play"},_=o({name:"Play"}),d=Object.assign(_,{setup(c){return(r,l)=>(t(),a("div",s,[n(e)]))}});export{d as default};

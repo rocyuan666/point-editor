@@ -21,7 +21,7 @@ module.exports = {
   app: {
     name: packageJson.name,
     version: packageJson.version,
-    bundleId: 'top.rocyuan.electron',
+    bundleId: 'top.rocyuan.point.editor',
     copyright: 'Copyright (C) 2023 RocYuan',
   },
 }

@@ -1,6 +1,6 @@
 {
-  "name": "roc-cli-electron-base-template",
-  "description": "roc-cli-electron-base-template",
+  "name": "point-editor",
+  "description": "point-editor",
   "version": "1.0.0",
   "main": "src/main.js",
   "author": "rocyuan",

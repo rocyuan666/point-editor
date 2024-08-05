@@ -1,47 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>roc-cli-electron-base-template</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="./favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>roc-cli-vue3-template</title>
+    <script type="module" crossorigin src="./assets/index-670daf14.js"></script>
+    <link rel="stylesheet" href="./assets/index-baf62fb2.css">
   </head>
   <body>
-    <div class="wrap">
-      <h1>roc-cli-electron-base-template</h1>
-      <hr />
-      <p>node版本:<span id="node"></span></p>
-      <p>chrome版本<span id="chrome"></span></p>
-      <p>electron版本<span id="electron"></span></p>
-      <hr />
-      <h1>electron主进程与渲染进程通信</h1>
-      <p style="color: #f00">发送后主进程等待一秒返回消息</p>
-      <input id="message-input" type="text" />
-      <button id="btn-send" onclick="handleDemo()">发送信息</button>
-      <p id="res-message"></p>
-    </div>
-    <script>
-      document.querySelector('#node').innerHTML = window.rocApi.node()
-      document.querySelector('#chrome').innerHTML = window.rocApi.chrome()
-      document.querySelector('#electron').innerHTML = window.rocApi.electron()
-      function handleDemo() {
-        const buttonSendDom = document.querySelector('#btn-send')
-        const inputDom = document.querySelector('#message-input')
-        buttonSendDom.disabled = true
-        inputDom.disabled = true
-        const message = inputDom.value
-        window.rocApi
-          .demo(message)
-          .then((res) => {
-            const p = document.createElement('p')
-            p.innerText = res
-            document.querySelector('#res-message').appendChild(p)
-            inputDom.value = ''
-            buttonSendDom.disabled = false
-            inputDom.disabled = false
-          })
-          .catch((err) => {})
-      }
-    </script>
+    <div id="app"></div>
+    
   </body>
 </html>
